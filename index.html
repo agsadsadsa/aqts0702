@@ -1,0 +1,349 @@
+<!DOCTYPE html> <!-- 定义 HTML5 文档类型 -->
+<html lang="en"> <!-- 页面语言设置为英文 -->
+<head>
+    <meta charset="UTF-8"> <!-- 设置字符编码为 UTF-8 -->
+    <title>WebCatalog Desktop 使用说明</title> <!-- 页面标题 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- 引入 jQuery 库 -->
+    <style>
+        /* 页面基础样式 */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000; /* 背景黑色 */
+            color: #fff; /* 字体白色 */
+            font-family: Arial, sans-serif; /* 使用 Arial 字体 */
+            overflow-x: hidden; /* 隐藏横向滚动条 */
+        }
+
+        canvas {
+            position: fixed; /* 固定定位 */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* 视窗高度 */
+            z-index: 1; /* 在内容下方 */
+        }
+
+        .content {
+            position: relative;
+            z-index: 2; /* 在 canvas 上方 */
+            width: 80%;
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* 半透明背景 */
+            border-radius: 8px;
+            opacity: 0; /* 初始隐藏 */
+            transition: opacity 1.5s ease 1s; /* 动画效果，延迟 2s */
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: #111;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 40%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+            transition: all 1s ease;
+        }
+
+        .header .intro {
+            width: 60%;
+            padding: 10px;
+        }
+
+        .header .intro h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header .intro p, .header .intro h3 {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .header .intro a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        .header .intro a:hover {
+            text-decoration: underline;
+        }
+
+        .tutorials {
+            padding: 20px;
+            background: #111;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .tutorial-section {
+            margin-bottom: 40px;
+        }
+
+        .tutorial-section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .tutorial-section p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .tutorial-section iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        .footer {
+            padding: 20px;
+            background: #111;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .footer p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .footer a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* 开场动画容器样式 */
+        #intro-cover {
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #intro-img {
+            width: 60%;
+            height: auto;
+            animation: zoomIn 2s ease-in-out forwards; /* 开场放大动画 */
+        }
+
+        #intro-cover.hide {
+            transform: scale(0.4) translate(-80%, -80%); /* 缩小并位移 */
+            opacity: 0; /* 淡出 */
+            transition: all 1.5s ease; /* 转场动画 */
+        }
+
+        /* 缩放动画定义 */
+        @keyframes zoomIn {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="intro-cover"> <!-- 开场封面 -->
+        <img src="lbkc.png" alt="Opening Image" id="intro-img"> <!-- 封面图片 -->
+    </div>
+
+    <canvas id="canvas"></canvas> <!-- 粒子动画画布 -->
+
+    <div class="content"> <!-- 主内容容器 -->
+        <div class="header">
+            <img src="lb.png" alt="Particle Animation Screenshot"> <!-- 预览图 -->
+            <div class="intro">
+                <h1>远程软件连接苹果、安卓手机的方法</h1>
+                <p>
+                    <h3>⚡最近安全大检查，需要远程软件连接检查大家手机，电脑如何使用软成软件连接苹果、安卓手机。<br>✅有些弟兄姊妹没有安全的LINE 或者没办法通过LINE 共享屏幕，所以咱们就可以通过这个远程软件把手机上的画面投屏到电脑上。
+					<br>☣️下面有电脑分别连接苹果、安卓两种手机远程软件的使用方法。</h3>
+                </p> <!-- 简介文本，包含两个外部链接 -->
+            </div>
+        </div>
+
+        <div class="tutorials"> <!-- 教程区域，包含四个视频教程 -->
+            <div class="tutorial-section"> <!-- 第一个教程部分 -->
+                <h2>苹果手机：</h2> <!-- 教程标题 -->
+				 <p>
+                   电脑打开这个链接下载软件：<a href="https://www.lonelyscreen.com/" target="_blank">下载 LonelyScreen</a>
+                </p> <!-- 简介文本，包含两个外部链接 -->
+                <p>通过软件LonelyScreen这个软件，将苹果手机镜像画面投屏到电脑上，这样对方就能通过电脑看到咱们手机上的内容啦！（可直接在下面窗口中点击“Download”下载）</p> <!-- 教程描述 -->
+                <iframe src="https://www.lonelyscreen.com/" allowfullscreen></iframe> <!-- 嵌入 YouTube 视频 -->
+            </div>
+            <div class="tutorial-section"> <!-- 第二个教程部分 -->
+                <h2>一、在电脑上安装LonelyScreen软件以及使用教程：</h2> <!-- 教程标题 -->
+                <p>打开软件LonelyScreen下载网址，下载并安装LonelyScreen软件。</p> <!-- 教程描述 -->
+                <iframe src="https://www.youtube.com/embed/ouOclaRMnmE" allowfullscreen></iframe> <!-- 嵌入 YouTube 视频 -->
+            </div>
+            <div class="tutorial-section"> <!-- 第三个教程部分 -->
+                <h2>二、苹果手机屏幕镜像连接设置，使用以及注意事项教程：</h2> <!-- 教程标题 -->
+                <p>注意使用LonelyScreen软件需将电脑和手机上的VPN软件关闭</p> <!-- 教程描述 -->
+                <iframe src="https://www.youtube.com/embed/tyYzZt-KeUQ?feature=share" allowfullscreen></iframe> <!-- 嵌入 YouTube 视频 -->
+            </div>
+            <div class="tutorial-section"> <!-- 第四个教程部分 -->
+                <h2>三、苹果手机屏幕镜像到电脑上后的使用方法和注意事项教程：</h2> <!-- 教程标题 -->
+                <p>软件投屏效果，如果出现问题如何排查</p> <!-- 教程描述 -->
+                <iframe src="https://www.youtube.com/embed/j-VlO2QAld0" allowfullscreen></iframe> <!-- 嵌入 YouTube 视频 -->
+            </div>
+			<div class="tutorial-section"> <!-- 第四个教程部分 -->
+                <h2>安卓手机：</h2> <!-- 教程标题 -->
+                <p>电脑远程连接安卓手机的方法，可用于远程检查手机或者操作手机申请邮箱。
+			    <p>电脑如何使用AnyDesk远程软件连接安卓手机（以三星手机为例）：
+		</p> <!-- 教程描述 -->
+                <iframe src="https://www.youtube.com/embed/4fAHYwPMoBQ" allowfullscreen></iframe> <!-- 嵌入 YouTube 视频 -->
+            </div>
+        </div>
+
+        <div class="footer"> <!-- 底部区域，包含进一步学习的链接 -->
+            <p>
+                相关文档内容： <a href="https://docs.google.com/document/d/1gyoyU39FEYgrfy04zoaaiKCFjfPhXvJ6gUCS_iD_4GU/edit?tab=t.0#heading=h.jywc4ngrfqi1" target="_blank">第七十六章： 💥远程软件连接苹果、安卓手机的方法💥</a> <br>阅读其他内容： <a href="https://docs.google.com/document/d/1gyoyU39FEYgrfy04zoaaiKCFjfPhXvJ6gUCS_iD_4GU/edit?tab=t.0#heading=h.wc86u1w9mya0" target="_blank">安全推送（持续更新）</a>.
+            </p> 
+		<!-- 底部文本，包含两个外部学习资源链接 -->
+        </div>
+    </div>
+
+    <script>
+        $(function () { // 页面加载完成后执行
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+
+            function resizeCanvas() { // 设置 canvas 大小为窗口大小
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas); // 窗口尺寸变化时调整 canvas
+
+            let mouse = { x: width * 0.5, y: height * 0.5 }; // 初始鼠标位置
+            const particles = [];
+            const config = {
+                count: 600,
+                maxDistance: 60,
+                mouseRadius: 120
+            };
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.radius = Math.random() * 1.5 + 0.5;
+                    this.color = `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, 0.7)`;
+                }
+
+                move() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                    if (this.y < 0 || this.y > height) this.vy = -this.vy;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.fillStyle = this.color;
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles.length = 0;
+                for (let i = 0; i < config.count; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function connectParticles() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p1 = particles[i];
+                        const p2 = particles[j];
+                        const dx = p1.x - p2.x;
+                        const dy = p1.y - p2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < config.maxDistance) {
+                            const mouseDx = p1.x - mouse.x;
+                            const mouseDy = p1.y - mouse.y;
+                            const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
+
+                            if (mouseDistance < config.mouseRadius) {
+                                ctx.beginPath();
+                                ctx.strokeStyle = `rgba(255, 255, 255, ${1 - distance / config.maxDistance})`;
+                                ctx.lineWidth = 0.2;
+                                ctx.moveTo(p1.x, p1.y);
+                                ctx.lineTo(p2.x, p2.y);
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height); // 清空画布
+                particles.forEach(p => {
+                    p.move();
+                    p.draw();
+                });
+                connectParticles();
+                requestAnimationFrame(animate); // 下一帧继续动画
+            }
+
+            $(canvas).on('mousemove', e => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+            });
+
+            $(canvas).on('mouseleave', () => {
+                mouse.x = width * 0.5;
+                mouse.y = height * 0.5;
+            });
+
+            initParticles();
+            animate();
+
+            // 控制开场动画和显示内容
+            setTimeout(() => {
+                $('#intro-cover').addClass('hide'); // 添加淡出缩小样式
+                $('.content').css('opacity', '1'); // 显示主内容
+                setTimeout(() => {
+                    $('#intro-cover').remove(); // 完全移除开场动画容器
+                }, 1500);
+            }, 2000); // 两秒后启动转场
+        });
+    </script>
+</body>
+</html>
